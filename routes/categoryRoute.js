@@ -12,7 +12,7 @@ router.get("/categories", (req, res) => {
     res.status(400).send(error);
   }
 });
-router.post("/categories", (req, re) => {
+router.post("/categories", (req, res) => {
   const { name, description, thumbnail } = req.body;
   try {
     con.query(

@@ -12,12 +12,8 @@ router.get("/categories", (req, res) => {
     res.status(400).send(error);
   }
 });
-router.post("/", (req, re) => {
-  const {
-      name,
-      description,
-      thumbnail
-  } = req.body;
+router.post("/categories", (req, re) => {
+  const { name, description, thumbnail } = req.body;
   try {
     con.query(
       "INSERT INTO categories ('${name}', '${description}', '${thumbnail}",

@@ -12,7 +12,7 @@ const orderRoute = require("./routes/orderRoute");
 const app = express(); // Initialize express as an app variable
 app.set("port", process.env.PORT || 6969); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
-app.use(cors()); // Dont let local development give errors
+app.use(cors()); // Don't let local development give errors
 
 // This is where we check URLs and Request methods to create functionality
 // GET '/' is always what will be displayed on the home page of your application

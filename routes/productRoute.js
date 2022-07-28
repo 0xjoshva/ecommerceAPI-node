@@ -15,6 +15,22 @@ router.get("/", (req, res) => {
   }
 });
 
+//GET SINGLE ITEM
+router.get("/:id", (req, res) => {
+  try {
+    con.query(
+      `SELECT * FROM products WHERE product_id = '${req.params.id}'`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+
 //POST
 router.post("/", (req, res) => {
   const {
@@ -55,9 +71,9 @@ router.post("/", (req, res) => {
 });
 
 //DELETE
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
   try {
-      con.query(`DELETE FROM products WHERE product_id = ${req.params.id}`, (err, result) => {
+      con.query(`DELETE FROM products WHERE product_id = '${req.params.id}'`, (err, result) => {
       if (err) throw err;
       res.send(result);
     });

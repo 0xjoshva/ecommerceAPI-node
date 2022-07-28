@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
   const { name, description, thumbnail } = req.body;
   try {
     con.query(
-      `INSERT INTO categories (name, description, thumbnail) values ('${name}', '${description}', '${thumbnail}', '${billing_address}', '${default_shipping_address}', '${country}', '${phone}', '${user_type}')`,
+      `INSERT INTO categories (name, description, thumbnail) values ('${name}', '${description}', '${thumbnail}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

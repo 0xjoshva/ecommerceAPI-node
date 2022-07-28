@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../lib/db_connection");
-router.get("/categories", (req, res) => {
+router.get("/", (req, res) => {
   try {
     con.query("SELECT * FROM categories", (err, result) => {
       if (err) throw err;
@@ -12,7 +12,7 @@ router.get("/categories", (req, res) => {
     res.status(400).send(error);
   }
 });
-router.post("/categories", (req, res) => {
+router.post("/", (req, re) => {
   const { name, description, thumbnail } = req.body;
   try {
     con.query(

@@ -5,7 +5,7 @@ const con = require("../lib/db_connection");
 //GET
 router.get("/", (req, res) => {
   try {
-    con.query("SELECT * FROM categories", (err, result) => {
+    con.query("SELECT * FROM orders", (err, result) => {
       if (err) throw err;
       res.send(result);
     });
@@ -17,24 +17,30 @@ router.get("/", (req, res) => {
 
 //POST
 router.post("/", (req, res) => {
-  const { name, description, thumbnail } = req.body;
+  const {
+      amount,
+      shipping_address,
+      order_email,
+      order_date,
+      order_status
+  } = req.body;
   try {
     con.query(
-      `INSERT INTO categories (name, description, thumbnail) values ('${name}', '${description}', '${thumbnail}')`,
+      `INSERT INTO orders (amount, shipping_address, order_email, order_date, order_status) values ('${amount}', '${shipping_address}', '${order_email}', '${order_date}', '${order_status}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
       }
     );
   } catch (error) {
-    console.log(error);
+    console.log(err);
   }
 });
 
 //DELETE
 router.delete("/", (req, res) => {
   try {
-      con.query(`DELETE FROM categories WHERE category_id = ${req.params.id}`, (err, result) => {
+      con.query(`DELETE FROM orders WHERE order_id = ${req.params.id}`, (err, result) => {
       if (err) throw err;
       res.send(result);
     });
@@ -44,5 +50,5 @@ router.delete("/", (req, res) => {
   }
 });
 
-module.exports = router;
 
+module.exports = router;

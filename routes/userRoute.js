@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const con = require("../lib/db_connection");
 
+//GET
 router.get("/", (req, res) => {
   try {
     con.query("SELECT * FROM users", (err, result) => {
@@ -14,6 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
+//POST
 router.post("/", (req, res) => {
   const {
     email,
@@ -35,6 +37,19 @@ router.post("/", (req, res) => {
     );
   } catch (error) {
     console.log(err);
+  }
+});
+
+//DELETE
+router.delete("/", (req, res) => {
+  try {
+      con.query(`DELETE FROM products WHERE user_id = ${req.params.id}`, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 

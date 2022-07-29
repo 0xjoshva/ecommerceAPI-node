@@ -7,7 +7,9 @@ const bcrypt = require("bcryptjs");
 // The Route where Encryption starts
 router.post("/register", (req, res) => {
   try {
+    //sql Query Statement
     let sql = "INSERT INTO users SET ?";
+    //the body of the request
     const {
       full_name,
       email,
@@ -20,23 +22,29 @@ router.post("/register", (req, res) => {
     } = req.body;
 
     // The start of hashing / encryption
+    //salt is the length of a single character in the password
     const salt = bcrypt.genSaltSync(10);
+    //
     const hash = bcrypt.hashSync(password, salt);
 
     let user = {
       full_name,
       email,
       // We sending the hash value to be stored within the table
-      hash : password,
+      password: hash,
       user_type,
       phone,
       country,
       billing_address,
       default_shipping_address,
     };
+
+    //connection to database
+    //accepting sql and user variables
     con.query(sql, user, (err, result) => {
       if (err) throw err;
       console.log(result);
+      //message sent upon successful registration
       res.send(`User ${(user.full_name, user.email)} created successfully`);
     });
   } catch (error) {
@@ -49,23 +57,27 @@ router.post("/register", (req, res) => {
 // The Route where Decryption happens
 router.post("/login", (req, res) => {
   try {
+    //sql query
     let sql = "SELECT * FROM users WHERE ?";
+    //which values it is accepting
     let user = {
       email: req.body.email,
     };
     con.query(sql, user, async (err, result) => {
       if (err) throw err;
       if (result.length === 0) {
+        //error if email found in database
         res.send("Email not found please register");
       } else {
         // Decryption
         // Accepts the password stored in database and the password given by user (req.body)
+        //requesting password
         const isMatch = await bcrypt.compare(
           req.body.password,
           result[0].password
         );
         // If password does not match
-        if (!isMatch) {
+        if (isMatch === false) {
           res.send("Password incorrect");
         }
         else {

@@ -7,28 +7,38 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>USERS</h1>
+    <h1>USERS</h1> <a href="login.html">Login</a>
     <div id="output"></div>
+    <a href="products.html">View Products</a>
     <script type="text/javascript">
       fetch("http://localhost:6969/users", {
-        // method: "GET",
-        // headers: {
-        //   "x-auth-token":
-        //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjUsImZ1bGxfbmFtZSI6Ik1vbmtleSBEYW5hbmEiLCJlbWFpbCI6Im1vbmtleWxvcmQxMjNAZ21haWwuY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJwaG9uZSI6IisyNzEyMTIzNCIsImNvdW50cnkiOiJTb3V0aCBBZnJpY2EiLCJiaWxsaW5nX2FkZHJlc3MiOiIyMSBMb25nIFN0cmVldCwgQ2FwZSBUb3duIiwiZGVmYXVsdF9zaGlwcGluZ19hZGRyZXNzIjoiMjEgTG9uZyBTdHJlZXQsIENhcGUgVG93biJ9LCJpYXQiOjE2NTkzNTE4ODgsImV4cCI6MTY5MDg4Nzg4OH0.tFzXLMZUjfyLyqkyGBGaNaT1_ipa5KIPpMVLB9hRgEA",
-        // },
       })
         .then((res) => res.json())
         .then((data) => {
 
           const output = document.getElementById("output");
           for(let i=0; i < data.length; i++){
-          output.innerHTML += `${data[i].email} <br/>`}
+          output.innerHTML += `
+          ${data[i].user_id}<br/>
+          ${data[i].email}<br/>
+          ${data[i].password}<br/>
+          ${data[i].full_name}<br/>
+          ${data[i].user_type}<br/>
+          `}
         });
-
-        // document.getElementsByName
-        //link
-        //method type = POST or GET
-        //Body ---------- What do we want from the user? The email 
-        </script>
+ 
+   </script>
+   <style> 
+   body{
+    width: 100%;
+    height: 100vh;
+   }
+   a{ margin-top: 800px;
+    background: rgb(7, 118, 174);
+     text-decoration: none;
+     color: white;
+     padding: 12px 24px;
+ }
+ </style>
   </body>
 </html>

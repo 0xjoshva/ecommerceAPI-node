@@ -104,6 +104,7 @@ router.post("/login", (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  console.log(req.body)
 });
 
 router.get("/", (req, res) => {
@@ -195,7 +196,7 @@ router.put("/update-user/:id", (req, res) => {
         let updateUser = {
           full_name: req.body.full_name,
           email: req.body.email,
-          password: hash,
+          password: req.body.password,
           user_type: req.body.user_type,
           phone: req.body.phone,
           country: req.body.country,
@@ -233,3 +234,24 @@ router.get("/verify", (req, res) => {
 });
 
 module.exports = router;
+
+
+// //get login inputs
+// const emailInput = document.getElementsByName("email").value;
+// const passInput = document.getElementsByName("password").value;
+
+// //check if input values match db values
+// if (email, password) {
+//   //query db
+//   con.query("SELECT * FROM users WHERE email = ? AND password = ?",
+//     function (err, result) {
+//       if (err) throw err;
+//       console.log(result);
+//     }
+//   )
+// }
+// //alert user that they have entered incorrect data
+// else {
+//   console.log('password or email incorrect');
+//   console.log(err);
+// }

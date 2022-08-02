@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> PRODUCTS</h1> <a href="login.html">Login</a>
+        <div id="output"></div>
+    <a href="index.html">View Users</a>
+
+
+    <script type="text/javascript">
+      fetch("http://localhost:6969/products", {
+      })
+        .then((res) => res.json())
+        .then((data) => {
+
+          const output = document.getElementById("output");
+          for(let i=0; i < data.length; i++){
+          output.innerHTML += `
+          ${data[i].product_id}<br/>
+          ${data[i].stock}<br/>
+          ${data[i].name}<br/>
+          ${data[i].price}<br/>
+          <img src="${data[i].image}"><br/>
+          `}
+        });
+ 
+   </script>
+   <style scoped>
+ a{
+    background: rgb(7, 118, 174);
+     text-decoration: none;
+     color: white;
+     padding: 12px 24px;
+ }
+ img{
+    height: 250px;
+    width: auto;
+ }
+   </style>
+</body>
+</html>

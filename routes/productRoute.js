@@ -42,7 +42,6 @@ router.post("/", (req, res) => {
     thumbnail,
     image,
     category,
-    create_date,
     stock,
   } = req.body;
   try {
@@ -56,10 +55,9 @@ router.post("/", (req, res) => {
         thumbnail,
         image,
         category,
-        create_date,
         stock)
         values
-        ('${sku}', '${name}', '${price}', '${weight}', '${descriptions}', '${thumbnail}', '${image}', '${category},'${create_date}','${stock}')`,
+        ('${sku}', '${name}', '${price}', '${weight}', '${descriptions}', '${thumbnail}', '${image}', '${category}, '${stock}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
